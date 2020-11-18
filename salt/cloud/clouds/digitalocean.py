@@ -373,6 +373,13 @@ def create(vm_):
             "then private_networking should be set as 'True'."
         )
 
+    vpc_uuid = config.get_cloud_config_value(
+        "vpc_uuid", vm_, __opts__, search_global=False, default=None,
+    )
+
+    if vpc_uuid is not None:
+        kwargs["vpc_uuid"] = private_networking
+
     backups_enabled = config.get_cloud_config_value(
         "backups_enabled", vm_, __opts__, search_global=False, default=None,
     )
